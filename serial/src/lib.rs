@@ -1,5 +1,7 @@
 pub mod serial {
-    #[derive(Debug)]
+    use builder::Builder;
+
+    #[derive(Debug, Builder)]
     pub struct Serial {
         pub baud: Option<u32>,
         pub port: Option<String>,
@@ -38,12 +40,5 @@ pub mod serial {
             }
         }
     }
-    impl Serial {
-        pub fn build() -> Self {
-            Self {
-                baud: None,
-                port: None,
-            }
-        }
-    }
+    impl Serial {}
 }
