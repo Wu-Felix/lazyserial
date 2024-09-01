@@ -100,8 +100,8 @@ fn parse_struct_data_ty(ty: &syn::Type) -> Option<&syn::Type> {
                     ..
                 }) = segment.arguments
                 {
-                    if let Some(syn::GenericArgument::Type(ref Type)) = args.first() {
-                        return Some(Type);
+                    if let Some(syn::GenericArgument::Type(a)) = args.first() {
+                        return Some(a);
                     }
                 }
             }
