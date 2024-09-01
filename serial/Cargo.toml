@@ -1,0 +1,10 @@
+[package]
+name = "serial"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serialport = '4.5.0'
+builder={path="../builder/"}
+tokio='1.40.0'
+clap='4.5.16'
