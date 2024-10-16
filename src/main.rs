@@ -4,7 +4,7 @@ use tokio_serial::SerialPortBuilderExt;
 async fn main() {
     get_serial_port_list();
     if let Ok(serial) = tokio_serial::new("com2", 115200).open_native_async() {
-        let (mut serial_rx, mut _serial_tx) = tokio::io::split(serial);
+        let (mut serial_rx, mut serial_tx) = tokio::io::split(serial);
         let serial_rx_task = tokio::spawn(async move {
             let mut serial_rx_buf = bytes::BytesMut::new();
             serial_rx_buf.resize(1000, 0);
@@ -16,7 +16,18 @@ async fn main() {
                     .unwrap();
             }
         });
-        let _ = tokio::join!(serial_rx_task);
+        let serial_tx_task = tokio::spawn(async move {
+            let mut serial_tx_buf = bytes::BytesMut::new();
+            serial_tx_buf.resize(1000, 0);
+            loop {
+                let rx_len = tokio::io::stdin()
+                    .read(serial_tx_buf.as_mut())
+                    .await
+                    .unwrap();
+                let _ = serial_tx.write(&serial_tx_buf[0..rx_len]).await.unwrap();
+            }
+        });
+        let _ = tokio::join!(serial_rx_task, serial_tx_task);
     } else {
         println!("open serial error");
     }
