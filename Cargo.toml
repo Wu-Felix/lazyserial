@@ -4,3 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+tokio = { version = '1.40.0', features = ["full"] }
+bytes='1.7.2'
+tokio-serial='5.4.4'
