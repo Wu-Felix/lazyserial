@@ -7,3 +7,4 @@ edition = "2021"
 tokio = { version = '1.40.0', features = ["full"] }
 bytes='1.7.2'
 tokio-serial='5.4.4'
+clap = { version = "4.5.20", features = ["derive"] }
