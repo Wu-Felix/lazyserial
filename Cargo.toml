@@ -2,6 +2,10 @@
 name = "lazyserial"
 version = "0.1.0"
 edition = "2021"
+email="wu-felix@outlook.com"
+description = "serial"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Wu-Felix/lazyserial.git"
 
 [dependencies]
 tokio = { version = '1.40.0', features = ["full"] }
